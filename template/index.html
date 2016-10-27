@@ -4,10 +4,17 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>GSMA-Weija</title>
-	<link rel="stylesheet" href="">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.css">
 </head>
 <body>
-	<h2>this is header</h2>
+	<div class="ui inverted segment">
+  <div class="ui inverted secondary menu">
+    <a class="active item">Home</a>
+    <a class="item">Messages</a>
+    <a class="item">Friends</a>
+  </div>
+</div>
 
 	<script src={{ url_for('static', filename="js/main.js") }}></script>
 </body>
