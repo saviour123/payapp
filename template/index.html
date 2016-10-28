@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GSMA-Weija</title>
-	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.css">
+
+	{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Home{% endblock %} - GSMA-Weija</title>
+    {% endblock %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
 </head>
 <body>
-	<div class="ui inverted segment">
-  <div class="ui inverted secondary menu">
-    <a class="active item">Home</a>
-    <a class="item">Messages</a>
-    <a class="item">Friends</a>
-  </div>
-</div>
 
-	<script src={{ url_for('static', filename="js/main.js") }}></script>
+<!-- <div class="ui teal three item inverted menu">
+  <a class="active item">Home</a>
+  <a class="item">Messages</a>
+  <a class="item">Friends</a>
+</div> -->
+	{% block title %}
+	<h1>Please Login</h1>
+		<form action="/msg/loginauth/" method="post">
+		    Login:
+		    <br><br>
+		    <input type="text" name="username" placeholder="Username">
+		    <br>
+		    <input type="password" name="password" placeholder="Password">
+		    <br><br>
+		    <input type = "submit" value = "Submit">
+	  	</form>
+	  	
+    <script src={{ url_for('static', filename="js/main.js") }}></script>
+    {% endblock %}
 </body>
 </html>
