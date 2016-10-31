@@ -1,0 +1,11 @@
+body {
+    -webkit-text-size-adjust: none;
+    margin-top: 0;
+    padding: 0;
+    font-family: Verdana, "Bitstream Vera Sans", sans-serif;
+    line-height: 1.8em;
+    color: #fff;
+    text-align: left;
+    min-width: 760px;
+    background-color: #4a525a;
+}

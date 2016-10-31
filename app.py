@@ -20,14 +20,10 @@ def login_required(f):
 	return wrap
 
 #page decorators and functions
-# @app.route('/')
-# #@login_required
-# def splash_page():
-# 	return render_template('splash.html')
-
-# @app.route('/welcome')
-# def welcome():
-# 	return render_template('welcome.html')
+@app.route('/welcome')
+@login_required
+def welcome():
+	return render_template('welcome.html')
 
 # Loggin route
 @app.route('/', methods=['GET', 'POST'])
@@ -39,7 +35,7 @@ def login():
         else:
         	session['logged_in'] = True
         	flash('You are Logged In ')
-        	return redirect(url_for('home'))
+        	return redirect(url_for('welcome'))
     return render_template('login.html', error=error)
 
 

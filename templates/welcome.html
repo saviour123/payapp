@@ -1,14 +1,49 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Flask Intro</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Welcome to Flask!</h2>
-      <br>
-      <p>Click <a href="/">here</a> to go home.</p>
+<head>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/welcome.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/semantic.css') }}">
+  {% if title %}
+  <title>{{ title }} - GSMA-Portal</title>
+  {% else %}
+  <title>Welcome to GSMA</title>
+  {% endif %}
+</head>
+<body>
+<div class="ui menu">
+  <a class="item">Browse</a>
+  <a class="item">Submit</a>
+  <div class="right menu">
+    <a class="item">Sign Up</a>
+  </div>
+</div>
+
+
+    <h1>GSMA-PORTAL</h1>
+    <div class="ui two column grid">
+          <div class="column">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </div>  
+            <div class="column">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+
+      </div>
     </div>
-  </body>
+
+
+
+    {% endblock %}
+
+</body>
 </html>
+
