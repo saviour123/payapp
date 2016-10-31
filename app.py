@@ -1,4 +1,4 @@
-from flask	import Flask, render_template, request, url_for, redirect, session
+from flask	import Flask, render_template, request, url_for, redirect, session, flash
 from functools import wraps
 
 
@@ -11,7 +11,7 @@ app.secret_key =  'saviourgidi'
 #login Decorators
 def login_required(f):
 	@wraps(f)
-	def wraps(*args, **kwargs):
+	def wrap(*args, **kwargs):
 		if 'logged_in' in session:
 			return f(*args, **kwargs)
 		else:
@@ -20,17 +20,17 @@ def login_required(f):
 	return wrap
 
 #page decorators and functions
-@app.route('/')
-@login_required
-def home():
-	return "Hello, World"
+# @app.route('/')
+# #@login_required
+# def splash_page():
+# 	return render_template('splash.html')
 
-@app.route('/welcome')
-def welcome():
-	return render_template('welcome.html')
+# @app.route('/welcome')
+# def welcome():
+# 	return render_template('welcome.html')
 
 # Loggin route
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':

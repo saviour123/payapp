@@ -1,0 +1,39 @@
+<html>
+<head>
+  <title> Welcome - login page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/semantic.css') }}" media="screen">
+</head>
+<body style="background-image: url('/static/img/wood.jpg');">
+
+  <br>
+
+  <div class="ui one column center aligned grid">
+    <div class="column six wide form-holder">
+      <h2 class="center aligned header form-head">Sign in</h2>
+      <hr>
+      <form class="" action="" method="post">
+      <div class="ui form">
+        <div class="field">
+          <label>Username</label>
+          <input type="text" placeholder="username" name="username" value="{{ request.form.username }}">
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" placeholder="password" name="password" value="{{ request.form.password }}">
+        </div>
+        <div class="field">
+          <input type="submit" value="sign in" class="ui button large fluid green">
+        </div>
+      </div>
+    </div>
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>
