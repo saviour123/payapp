@@ -42,9 +42,9 @@ def login():
 #logging out
 @app.route('/logout')
 def logout():
-	seesion.pop('logged_in', None)
-	flash("You are Logged Out")
-	return redirect(url_for('home'))
+	session.pop('logged_in', None)
+	flash("Thanks for using our service. \n You are Logged Out")
+	return redirect(url_for('welcome'))
 
 if __name__ == '__main__':
 	app.run(debug=True)

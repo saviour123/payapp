@@ -9,41 +9,39 @@
   {% endif %}
 </head>
 <body>
-<div class="ui menu">
-  <a class="item">Browse</a>
-  <a class="item">Submit</a>
-  <div class="right menu">
-    <a class="item">Sign Up</a>
+<!-- menu things -->
+  <div class="ui menu">
+    <a class="item">Home</a>
+    <div class="right menu">
+      <a href="/logout" class="item">Logout</a>
+    </div>
   </div>
-</div>
 
-
-    <h1>GSMA-PORTAL</h1>
-    <div class="ui two column grid">
-          <div class="column">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </div>  
-            <div class="column">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-
-      </div>
+<!-- the main Body -->
+<div class="container">
+  <h1>GSMA-PORTAL</h1>
+  {% block content %}
+  <div class="ui two column grid">
+    <div class="column">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>  
+    <div class="column">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
 
-
-
-    {% endblock %}
-
+  </div>
+</div><!-- container ends -->
+{% endblock %}
 </body>
 </html>
 

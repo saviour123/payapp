@@ -9,3 +9,7 @@ body {
     min-width: 760px;
     background-color: #4a525a;
 }
+
+div.container{
+	margin: 10px 10px 10px 0px;
+}
