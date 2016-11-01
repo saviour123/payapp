@@ -48,3 +48,10 @@
     {% for message in get_flashed_messages() %}
     <div class=flash>{{ message }}</div>
     {% endfor %}
+
+
+# engine = create_engine('mssql+pyodbc://scott:tiger@mydsn')
+# engine = create_engine("mssql+pyodbc://scott:tiger@myhost:port/databasename?driver=SQL+Server+Native+Client+10.0")
+# dialect+driver://username:password@host:port/database
+
+# postgresql://scott:tiger@localhost:port/mydatabase

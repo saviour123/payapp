@@ -1,4 +1,5 @@
-from flask	import Flask, render_template, request, url_for, redirect, session, flash, sqlalchemy
+from flask	import Flask, render_template, request, url_for, redirect, session, flash
+from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 
 
@@ -6,7 +7,9 @@ from functools import wraps
 #creating the application object
 app = Flask(__name__)
 app.secret_key =  'saviourgidi'
-engine = create_engine('mssql+pyodbc://scott:tiger@mydsn')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://scott:tiger@localhost:port/mydatabase'
+db = SQLAlchemy(app)
+ 
 
 
 
