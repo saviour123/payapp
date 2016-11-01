@@ -1,10 +1,13 @@
-from flask	import Flask, render_template, request, url_for, redirect, session, flash
+from flask	import Flask, render_template, request, url_for, redirect, session, flash, sqlalchemy
 from functools import wraps
+
 
 
 #creating the application object
 app = Flask(__name__)
 app.secret_key =  'saviourgidi'
+engine = create_engine('mssql+pyodbc://scott:tiger@mydsn')
+
 
 
 

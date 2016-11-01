@@ -1,28 +1,3 @@
-  body {
-    /*background: url('https://ununsplash.imgix.net/uploads/141362941583982a7e0fc/abcfbca1?q=75&fm=jpg&s=5266baf09e0e878b72b2e34adf2f54a0') fixed;*/
-    background-size: cover;
-    padding: 0;
-    margin: 0;
-  }
-
-  .form-holder {
-    background: rgba(255,255,255,0.2);
-    margin-top: 10%;
-    border-radius: 3px;
-  }
-
-  .form-head {
-    font-size: 30px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #fff;
-    text-shadow: 0 0 30px #000;
-    margin: 15px auto 30px auto;
-  }
-
-  .remember-me {
-    text-align: left;
-  }
-  .ui.checkbox label {
-    color: #ddd;
-  }
+body{
+	background-color: #fbf8f8;
+}

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <head>
-  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/welcome.css') }}">
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/semantic.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style/main.css') }}">
   {% if title %}
   <title>{{ title }} - GSMA-Portal</title>
   {% else %}
   <title>Welcome to GSMA</title>
   {% endif %}
 </head>
-<body>
+<body style="margin: 10px 89px 0px 89px;">
 <!-- menu things -->
   <div class="ui menu">
     <a class="item">Home</a>
