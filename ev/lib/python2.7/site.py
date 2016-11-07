@@ -526,7 +526,7 @@ def setencoding():
     """Set the string encoding used by the Unicode implementation.  The
     default is 'ascii', but if you're willing to experiment, you can
     change this."""
-    encoding = "ascii" # Default value set by _PyUnicode_Init()
+    encoding = "utf-8" # Default value set by _PyUnicode_Init()
     if 0:
         # Enable to support locale aware default string encodings.
         import locale
@@ -537,7 +537,7 @@ def setencoding():
         # Enable to switch off string to Unicode coercion and implicit
         # Unicode to string conversion.
         encoding = "undefined"
-    if encoding != "ascii":
+    if encoding != "utf-8":
         # On Non-Unicode builds this will raise an AttributeError...
         sys.setdefaultencoding(encoding) # Needs Python Unicode build !
 

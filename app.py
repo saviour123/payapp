@@ -7,7 +7,7 @@ from functools import wraps
 #creating the application object
 app = Flask(__name__)
 app.secret_key =  'saviourgidi'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://scott:tiger@localhost:port/mydatabase'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sav:sav@<dsnname>'#'mssql+pyodbc://scott:tiger@1:port/mydatabase'
 db = SQLAlchemy(app)
  
 
