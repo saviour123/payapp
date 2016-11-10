@@ -62,6 +62,13 @@ def profile(username):
 # 	n_query = user.query.filter_by(username="{}").format('search_word')
 
 
+routes and post, get method,
+if request methos id post, if request.method == 'POST':
+
+then 
+get the content user = request.form['nm']
+
+
 #addin entry/post user
 @app.route('/add_user', methods=['POST'])
 @login_required
