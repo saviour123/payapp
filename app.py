@@ -41,7 +41,26 @@ def login_required(f):
 @app.route('/welcome')
 @login_required
 def welcome():
-	return render_template('welcome.html')
+	my_user = User.query.all()
+	one_item = User.query.filter_by(username="test1").first()
+	return render_template('welcome.html',my_user=my_user, one_item=one_item)
+
+
+##customer profiling
+@app.route('/profile/<username>')
+@login_required
+def profile(username):
+	user = User.query.filter_by(username=username).first()
+	return render_template('profile.html',user=user)
+
+#searching with the search box
+# search_word = request.form[query]
+# @app.route('/search_q')
+# @login_required
+# def search_q():
+# 	search_word = request.form[query]
+# 	n_query = user.query.filter_by(username="{}").format('search_word')
+
 
 #addin entry/post user
 @app.route('/add_user', methods=['POST'])

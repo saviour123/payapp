@@ -31,6 +31,20 @@
     <input type="text" id="email" name="email">
     <input type="submit" name="submit">
   </form>
+<!-- simple form ends -->
+
+<!-- results display field -->
+<div>
+  <!-- loop for multiple items -->
+  {% for i in my_user %}
+    <li>{{ i.id }} - {{ i.username }} - {{ i.email }}</li>
+  {% endfor %}
+
+  {{ one_item.username }}
+
+  <li>{{ one_item.id }} - {{ one_item.username }} - {{ one_item.email }}</li>
+</div>
+
 
 <!-- the main Body -->
 <div class="container">
