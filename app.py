@@ -7,11 +7,21 @@ from functools import wraps
 #creating the application object
 app = Flask(__name__)
 app.secret_key =  'saviourgidi'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://sav:sav@<dsnname>'#'mssql+pyodbc://scott:tiger@1:port/mydatabase'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/stms'
 db = SQLAlchemy(app)
- 
 
+#my model
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True)
+    email = db.Column(db.String(120), unique=True)
 
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
+
+    def __repr__(self):
+        return '<User %r>' % self.username
 
 
 #login Decorators
@@ -25,11 +35,23 @@ def login_required(f):
 			return redirect(url_for('login'))
 	return wrap
 
+
+
 #page decorators and functions
 @app.route('/welcome')
 @login_required
 def welcome():
 	return render_template('welcome.html')
+
+#addin entry/post user
+@app.route('/add_user', methods=[post])
+@login_required
+def add_user():
+	user = User(request.form['username'], request.form['email'])
+	db.session.add(user)
+	db.session.commit()
+	return redirect(url_for(welcome))
+
 
 # Loggin route
 @app.route('/', methods=['GET', 'POST'])
