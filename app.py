@@ -44,13 +44,13 @@ def welcome():
 	return render_template('welcome.html')
 
 #addin entry/post user
-@app.route('/add_user', methods=[post])
+@app.route('/add_user', methods=['POST'])
 @login_required
 def add_user():
 	user = User(request.form['username'], request.form['email'])
 	db.session.add(user)
 	db.session.commit()
-	return redirect(url_for(welcome))
+	return redirect(url_for('welcome'))
 
 
 # Loggin route
