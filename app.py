@@ -37,51 +37,51 @@ def login_required(f):
 
 
 
-#page decorators and functions
-@app.route('/welcome')
-@login_required
-def welcome():
-	my_user = User.query.all()
-	one_item = User.query.filter_by(username="test1").first()
-	return render_template('welcome.html',my_user=my_user, one_item=one_item)
-
-
-##customer profiling
-@app.route('/profile/<username>')
-@login_required
-def profile(username):
-	user = User.query.filter_by(username=username).first()
-	return render_template('profile.html',user=user)
-
-#searching with the search box
-# search_word = request.form[query]
-# @app.route('/search_q')
+# #page decorators and functions
+# @app.route('/welcome')
 # @login_required
-# def search_q():
-# 	search_word = request.form[query]
-# 	n_query = user.query.filter_by(username="{}").format('search_word')
+# def index():
+# 	my_user = User.query.all()
+# 	one_item = User.query.filter_by(username="test1").first()
+# 	return render_template('index.html',my_user=my_user, one_item=one_item)
 
 
-routes and post, get method,
-if request methos id post, if request.method == 'POST':
+# ##customer profiling
+# @app.route('/profile/<username>')
+# @login_required
+# def profile(username):
+# 	user = User.query.filter_by(username=username).first()
+# 	return render_template('profile.html',user=user)
 
-then 
-get the content user = request.form['nm']
+# #searching with the search box
+# # search_word = request.form[query]
+# # @app.route('/search_q')
+# # @login_required
+# # def search_q():
+# # 	search_word = request.form[query]
+# # 	n_query = user.query.filter_by(username="{}").format('search_word')
 
 
-#addin entry/post user
-@app.route('/add_user', methods=['POST'])
-@login_required
-def add_user():
-	user = User(request.form['username'], request.form['email'])
-	db.session.add(user)
-	db.session.commit()
-	return redirect(url_for('welcome'))
+# #routes and post, get method,
+# #if request methos id post, if request.method == 'POST':
+
+# #then 
+# #get the content user = request.form['nm']
+
+
+# #addin entry/post user
+# @app.route('/add_user', methods=['POST'])
+# @login_required
+# def add_user():
+# 	user = User(request.form['username'], request.form['email'])
+# 	db.session.add(user)
+# 	db.session.commit()
+# 	return redirect(url_for('welcome'))
 
 
 # Loggin route
 @app.route('/', methods=['GET', 'POST'])
-def login():
+def index():
     error = None
     if request.method == 'POST':
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
@@ -90,7 +90,7 @@ def login():
         	session['logged_in'] = True
         	flash('You are Logged In ')
         	return redirect(url_for('welcome'))
-    return render_template('login.html', error=error)
+    return render_template('index.html', error=error)
 
 
 #logging out
