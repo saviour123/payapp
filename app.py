@@ -38,13 +38,13 @@ def login_required(f):
 
 
 # #page decorators and functions
-@app.route('/welcome')
+@app.route('/index')
 @login_required
 def index():
-	#my_user = User.query.all()
-	#one_item = User.query.filter_by(username="test1").first()
-    return render_template('index.html')
-	#return render_template('index.html',my_user=my_user, one_item=one_item)
+    my_user = User.query.all()
+    #one_item = User.query.filter_by(username="test1").first()
+    #return render_template('index.html',my_user=my_user, one_item=one_item)
+    return render_template('index.html',my_user=my_user)
 
 
 # ##customer profiling
@@ -56,6 +56,10 @@ def index():
 
 #searching with the search box
 #search_word = request.form[query]
+#routes and post, get method,
+#if request method id post, if request.method == 'POST'
+#then 
+#get the content user = request.form['nm']
 @app.route('/search_q')
 @login_required
 def search_q():
@@ -64,24 +68,20 @@ def search_q():
         q_db = user.query.filter_by(username="{}").format('q')
     else:
         flash('record not in database')
-    return redirect(url_for())
+    return redirect(url_for(index))
 
 
-routes and post, get method,
-if request methos id post, if request.method == 'POST':
-
-then 
-get the content user = request.form['nm']
 
 
-# #addin entry/post user
-# @app.route('/add_user', methods=['POST'])
-# @login_required
-# def add_user():
-# 	user = User(request.form['username'], request.form['email'])
-# 	db.session.add(user)
-# 	db.session.commit()
-# 	return redirect(url_for('welcome'))
+
+#addin entry/post user
+@app.route('/add_user', methods=['POST'])
+@login_required
+def add_user():
+	user = User(request.form['username'], request.form['email'])
+	db.session.add(user)
+	db.session.commit()
+	return redirect(url_for('index'))
 
 
 # Loggin route

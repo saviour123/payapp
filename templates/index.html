@@ -84,54 +84,31 @@
             </div>
         </div>
     </header>
-
-
-    {% block login %}
-    <h1>Please Login</h1>
-        <form class="" action="" method="post">
-            Login:
-            <br><br>
-            <label>Username</label>
-            <input type="text" placeholder="username" name="username" value="{{ request.form.username }}">
-            <br>
-            <label>Password</label>
-            <input type="password" placeholder="password" name="password" value="{{ request.form.password }}">
-            <br><br>
-            <input type="submit" value="sign in" class="ui button large fluid green">
-        </form>
-            {% if error %}
-                <p class="error"><strong>Error:</strong> {{ error }}
-            {% endif %}
-    </div>
-    {% endblock %}
-
-
-    <!-- saviours additions -->
-    <!-- menu things -->
-  <div class="ui menu">
-    <a class="item">Home</a>
-    <div class="right menu">
-      <div class="item">
-      <div class="ui transparent icon input">
-        <input placeholder="Search..." type="text">
-        <i class="search link icon"></i>
-      </div>
-    </div>
-      <a href="/logout" class="item">Logout</a>
-    </div>
-  </div>
-
-  <!-- simple form -->
+  <!-- simple form, to add entry-->
   <form method="post" action="/add_user">
     <label>Username: </label>
-    <input type="text" id="username" name="username">
+    <input type="text" id="username" name="username" required>
     <label>Email</label>
-    <input type="text" id="email" name="email">
+    <input type="text" id="email" name="email" required>
     <input type="submit" name="submit">
   </form>
 <!-- simple form ends -->
 
-<!-- results display field -->
+    {% block login %}
+    <!-- results display field -->
+        <div>
+          <!-- loop for multiple items -->
+          {% for i in my_user %}
+            <li>{{ i.id }} - {{ i.username }} - {{ i.email }}</li>
+          {% endfor %}
+        </div>
+
+    {% endblock %}
+
+
+
+
+
 
 </body>
     <!-- Portfolio Grid Section -->
