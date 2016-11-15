@@ -7,7 +7,7 @@ from functools import wraps
 #creating the application object
 app = Flask(__name__)
 app.secret_key =  'saviourgidi'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/stms'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/test_stms'
 db = SQLAlchemy(app)
 
 #my model
@@ -38,12 +38,13 @@ def login_required(f):
 
 
 # #page decorators and functions
-# @app.route('/welcome')
-# @login_required
-# def index():
-# 	my_user = User.query.all()
-# 	one_item = User.query.filter_by(username="test1").first()
-# 	return render_template('index.html',my_user=my_user, one_item=one_item)
+@app.route('/welcome')
+@login_required
+def index():
+	#my_user = User.query.all()
+	#one_item = User.query.filter_by(username="test1").first()
+    return render_template('index.html')
+	#return render_template('index.html',my_user=my_user, one_item=one_item)
 
 
 # ##customer profiling
@@ -53,20 +54,24 @@ def login_required(f):
 # 	user = User.query.filter_by(username=username).first()
 # 	return render_template('profile.html',user=user)
 
-# #searching with the search box
-# # search_word = request.form[query]
-# # @app.route('/search_q')
-# # @login_required
-# # def search_q():
-# # 	search_word = request.form[query]
-# # 	n_query = user.query.filter_by(username="{}").format('search_word')
+#searching with the search box
+#search_word = request.form[query]
+@app.route('/search_q')
+@login_required
+def search_q():
+    if method == POST:
+        q = request.form[query]
+        q_db = user.query.filter_by(username="{}").format('q')
+    else:
+        flash('record not in database')
+    return redirect(url_for())
 
 
-# #routes and post, get method,
-# #if request methos id post, if request.method == 'POST':
+routes and post, get method,
+if request methos id post, if request.method == 'POST':
 
-# #then 
-# #get the content user = request.form['nm']
+then 
+get the content user = request.form['nm']
 
 
 # #addin entry/post user
@@ -81,7 +86,7 @@ def login_required(f):
 
 # Loggin route
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def login():
     error = None
     if request.method == 'POST':
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
@@ -89,8 +94,8 @@ def index():
         else:
         	session['logged_in'] = True
         	flash('You are Logged In ')
-        	return redirect(url_for('welcome'))
-    return render_template('index.html', error=error)
+        	return redirect(url_for('index'))
+    return render_template('login.html', error=error)
 
 
 #logging out
@@ -98,7 +103,7 @@ def index():
 def logout():
 	session.pop('logged_in', None)
 	flash("Thanks for using our service. \n You are Logged Out")
-	return redirect(url_for('welcome'))
+	return redirect(url_for('login'))
 
 if __name__ == '__main__':
 	app.run(debug=True)

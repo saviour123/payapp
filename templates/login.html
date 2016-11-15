@@ -2,38 +2,34 @@
 <head>
   <title> Welcome - login page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style/main1.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login_css.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='style/semantic.css') }}" media="screen">
 </head>
-<body style="background-image: url('/static/img/wood.jpg');">
 
+
+<body style="background-image: url('/static/img/bg.jpg');"> 
   <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="wrap">
+          <p class="form-title"> Sign In</p>
+          <hr>
+          <form class="login" action="" method="post">
+            <input type="text" placeholder="username" name="username" value="{{ request.form.username }}"/>
+            <input type="password" placeholder="password" name="password" value="{{ request.form.password }}"/>
+            <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
+          </form>
+          <hr>
+        </div>
 
-  <div class="ui one column center aligned grid">
-    <div class="column six wide form-holder">
-      <h2 class="center aligned header form-head">Sign in</h2>
-      <hr>
-      <form class="" action="" method="post">
-      <div class="ui form">
-        <div class="field">
-          <label>Username</label>
-          <input type="text" placeholder="username" name="username" value="{{ request.form.username }}">
-        </div>
-        <div class="field">
-          <label>Password</label>
-          <input type="password" placeholder="password" name="password" value="{{ request.form.password }}">
-        </div>
-        <div class="field">
-          <input type="submit" value="sign in" class="ui button large fluid green">
-        </div>
+        <!-- for rendering errors -->
+        {% if error %}
+          <p class="error"><strong>Error:</strong> {{ error }}</p>
+        {% endif %}
       </div>
-    </div>
-    </form>
-    {% if error %}
-    <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-    </div>
   </div>
-
+</div>
+<script src={{ url_for('static', filename="js/login_js.js") }}></script>
 </body>
 </html>

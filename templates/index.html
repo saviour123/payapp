@@ -99,6 +99,10 @@
             <br><br>
             <input type="submit" value="sign in" class="ui button large fluid green">
         </form>
+            {% if error %}
+                <p class="error"><strong>Error:</strong> {{ error }}
+            {% endif %}
+    </div>
     {% endblock %}
 
 
