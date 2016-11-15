@@ -140,3 +140,22 @@
 
   <li>{{ one_item.id }} - {{ one_item.username }} - {{ one_item.email }}</li>
 </div>
+
+
+# ##customer profiling
+# @app.route('/profile/<username>')
+# @login_required
+# def profile(username):
+#   user = User.query.filter_by(username=username).first()
+#   return render_template('profile.html',user=user)
+
+#searching with the search box
+#search_word = request.form[query]
+#routes and post, get method,
+#if request method id post, if request.method == 'POST'
+#then 
+#get the content user = request.form['nm']
+
+    #return redirect(url_for(index))
+    #one_item = User.query.filter_by(username="test1").first()
+    #return render_template('index.html',my_user=my_user, one_item=one_item)

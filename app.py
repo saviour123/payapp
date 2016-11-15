@@ -35,42 +35,25 @@ def login_required(f):
 			return redirect(url_for('login'))
 	return wrap
 
-
-
-# #page decorators and functions
-@app.route('/index')
-@login_required
-def index():
-    my_user = User.query.all()
-    #one_item = User.query.filter_by(username="test1").first()
-    #return render_template('index.html',my_user=my_user, one_item=one_item)
-    return render_template('index.html',my_user=my_user)
-
-
-# ##customer profiling
-# @app.route('/profile/<username>')
-# @login_required
-# def profile(username):
-# 	user = User.query.filter_by(username=username).first()
-# 	return render_template('profile.html',user=user)
-
-#searching with the search box
-#search_word = request.form[query]
-#routes and post, get method,
-#if request method id post, if request.method == 'POST'
-#then 
-#get the content user = request.form['nm']
-@app.route('/search_q')
+#search function
+@app.route('/search_q', methods=['GET', 'POST'])
 @login_required
 def search_q():
-    if method == POST:
-        q = request.form[query]
-        q_db = user.query.filter_by(username="{}").format('q')
+    if request.method == 'POST':
+        q = request.form['query']
+        q_db = User.query.filter_by(username="{}").format('q')
     else:
         flash('record not in database')
-    return redirect(url_for(index))
+        return redirect(url_for(search_q))
+    return render_template("index.html", q_db=q_db)
 
-
+# #page decorators and functions
+@app.route('/index',methods=['GET','POST'])
+@login_required
+def index():
+    #my_user = User.query.all()
+    q_db = None
+    return render_template('index.html',q_db=q_db)
 
 
 
@@ -92,9 +75,10 @@ def login():
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
             error = 'Invalid Credentials. Please try again.'
         else:
-        	session['logged_in'] = True
-        	flash('You are Logged In ')
-        	return redirect(url_for('index'))
+            session['logged_in'] = True
+            flash('You are Logged In')
+            print 'you are logg'
+            return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
 
