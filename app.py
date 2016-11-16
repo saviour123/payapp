@@ -40,8 +40,7 @@ def login_required(f):
 @login_required
 def search_q():
     if request.method == 'POST':
-        q = request.form['query']
-        q_db = User.query.filter_by(username="{}").format('q')
+        q_db = User.query.filter_by(username="{}").format(request.form['query'])
     else:
         flash('record not in database')
         return redirect(url_for(search_q))
@@ -51,9 +50,8 @@ def search_q():
 @app.route('/index',methods=['GET','POST'])
 @login_required
 def index():
-    #my_user = User.query.all()
-    q_db = None
-    return render_template('index.html',q_db=q_db)
+    my_user = User.query.all()
+    return render_template('index.html', my_user=my_user)
 
 
 
