@@ -35,36 +35,6 @@ def login_required(f):
 			return redirect(url_for('login'))
 	return wrap
 
-#search function
-@app.route('/search_q', methods=['GET', 'POST'])
-@login_required
-def search_q():
-    if request.method == 'POST':
-        q_db = User.query.filter_by(username="{}").format(request.form['query'])
-    else:
-        flash('record not in database')
-        return redirect(url_for(search_q))
-    return render_template("index.html", q_db=q_db)
-
-# #page decorators and functions
-@app.route('/index',methods=['GET','POST'])
-@login_required
-def index():
-    my_user = User.query.all()
-    return render_template('index.html', my_user=my_user)
-
-
-
-#addin entry/post user
-@app.route('/add_user', methods=['POST'])
-@login_required
-def add_user():
-	user = User(request.form['username'], request.form['email'])
-	db.session.add(user)
-	db.session.commit()
-	return redirect(url_for('index'))
-
-
 # Loggin route
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -86,6 +56,31 @@ def logout():
 	session.pop('logged_in', None)
 	flash("Thanks for using our service. \n You are Logged Out")
 	return redirect(url_for('login'))
+
+# #page decorators and functions
+@app.route('/index',methods=['GET','POST'])
+@login_required
+def index():
+    my_user = User.query.all()
+    return render_template('index.html', my_user=my_user)
+
+
+#addin entry/post user
+@app.route('/add_user', methods=['POST'])
+@login_required
+def add_user():
+    user = User(request.form['username'], request.form['email'])
+    db.session.add(user)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+#search function
+@app.route('/search', methods=['POST'])
+def search():
+    query_tag = request.form['search']
+    search_tag = User.query.filter_by(username=query_tag).all()
+    return render_template('search.html', search_tag=search_tag)
+
 
 if __name__ == '__main__':
 	app.run(debug=True)

@@ -50,7 +50,8 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <form class="navbar-form" role="search" action="/search" method=post>
+                    <!-- search box -->
+                        <form class="navbar-form" role="search" action="/search" method="post">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request.form.search }}">
                                 <div class="input-group-btn">
@@ -90,6 +91,8 @@
             </div>
         </div>
     </header>
+
+{% block content %}
   <!-- simple form, to add entry-->
   <form method="post" action="/add_user">
     <label>Username: </label>
@@ -100,7 +103,7 @@
   </form>
 <!-- simple form ends -->
 
-    {% block login %}
+
     <!-- results display field -->
         <div>
           <!-- loop for multiple items -->
