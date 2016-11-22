@@ -1,27 +1,43 @@
 from flask	import Flask, render_template, request, url_for, redirect, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
+import datetime
 
 
 
 #creating the application object
 app = Flask(__name__)
 app.secret_key =  'saviourgidi'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/test_stms'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@192.168.1.6/stms'
 db = SQLAlchemy(app)
 
 #my model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
+    account =db.Column(db.String, unique=True)
+    paid_by = db.Column(db.String(120), unique=True)
+    paid_by_tele = db.Column(db.Integer, unique=True)
+    amount = db.Column(db.Integer)
+    GCR_No = db.Column(db.String(120), unique=True)
+    last_edited_user = db.Column(db.String(25))
+    confirmed_at = db.Column(db.DateTime())
+    created = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
+    Date_request = db.Column(db.DateTime())
+
+    #db.INT, primary_key=True, autoincrement=False, nullable=False
+
 
     def __init__(self, username, email):
-        self.username = username
-        self.email = email
+        self.account = account
+        self.paid_by = paid_by
+        self.paid_by_tele = paid_by_tele
+        self.amount = amount
+        self.GCR_No = GCR_No
+        self.last_edited_user = last_edited_user
+
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.account
 
 
 #login Decorators
