@@ -22,9 +22,9 @@ class records(db.Model):
     last_edited_user = db.Column(db.String(25))
     confirmed_at = db.Column(db.DateTime())
     created = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
-    Date_request = db.Column(db.DateTime()) 
+    Date_request = db.Column(db.DateTime())
 
-    #db.INT, primary_key=True, autoincrement=False, nullable=False
+
 
 
     def __init__(self, account, GCR_No, paid_by, paid_by_tele, amount, last_edited_user):
@@ -61,7 +61,6 @@ def login():
         else:
             session['logged_in'] = True
             flash('You are Logged In')
-            print 'you are logg'
             return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
@@ -94,7 +93,7 @@ def add_rec():
         amount = request.form['amount']
         last_edited_user = request.form['last_edited_user']
         #add records
-        entry = records(account, paid_by, paid_by_tele, amount, last_edited_user)
+        entry = records(account, GCR_No, paid_by, paid_by_tele, amount, last_edited_user)
         db.session.add(entry)
         db.session.commit()
         flash('Record entered succesfully')
@@ -102,6 +101,7 @@ def add_rec():
     return render_template('add_new.html')
 
 #search function
+@login_required
 @app.route('/search', methods=['POST'])
 def search():
     query_tag = request.form['search']

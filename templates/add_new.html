@@ -2,6 +2,13 @@
 {% block title %}Add Entry{% endblock %}
 {% block content %}
 
+{% block header %}
+
+<h3>Add Payment Record</h3>
+
+
+{% endblock %}
+
 <div class="container">
 	<!-- simple form, to add entry-->
 	<form method="post" action="/add_rec" role="form">
@@ -11,6 +18,14 @@
 				<input type="text" id="account" name="account" class="form-control" required>
 			</div>
 		</div>
+		<div class="row">
+			<div class="form-group col-xs-5 col-lg-1 ">
+				<label>GCR-No: </label>
+				<input type="text" id="GCR_No" name="GCR_No" class="form-control" required>
+			</div>
+		</div>
+
+
 		<div class="row">
 			<div class="form-group col-xs-5 col-lg-1 ">
 				<label>Paid By: </label>
@@ -23,12 +38,6 @@
 				<input type="text" id="paid_by_tele" name="paid_by_tele" class="form-control" required>
 			</div>
 		</div>
-<!-- 		<div class="row">
-			<div class="form-group col-xs-5 col-lg-1 ">
-				<label>GCR No.: </label>
-				<input type="text" id="GCR_No" name="GCR_No" class="form-control" required>
-			</div>
-		</div> -->
 		<div class="row">
 			<div class="form-group col-xs-5 col-lg-1 ">
 				<label>Amount: </label>
