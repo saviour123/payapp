@@ -12,22 +12,22 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@192.168.
 db = SQLAlchemy(app)
 
 #my model
-class User(db.Model):
+class records(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    account =db.Column(db.String, unique=True)
-    paid_by = db.Column(db.String(120), unique=True)
-    paid_by_tele = db.Column(db.Integer, unique=True)
+    account =db.Column(db.String)
+    paid_by = db.Column(db.String(120))
+    paid_by_tele = db.Column(db.Integer)
     amount = db.Column(db.Integer)
-    GCR_No = db.Column(db.String(120), unique=True)
+    GCR_No = db.Column(db.String(20))
     last_edited_user = db.Column(db.String(25))
     confirmed_at = db.Column(db.DateTime())
     created = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
-    Date_request = db.Column(db.DateTime())
+    Date_request = db.Column(db.DateTime()) 
 
     #db.INT, primary_key=True, autoincrement=False, nullable=False
 
 
-    def __init__(self, username, email):
+    def __init__(self, account, paid_by, paid_by_tele, amount, GCR_No, last_edited_user):
         self.account = account
         self.paid_by = paid_by
         self.paid_by_tele = paid_by_tele
@@ -37,7 +37,7 @@ class User(db.Model):
 
 
     def __repr__(self):
-        return '<User %r>' % self.account
+        return '<records %r>' % self.account
 
 
 #login Decorators
@@ -73,22 +73,37 @@ def logout():
 	flash("Thanks for using our service. \n You are Logged Out")
 	return redirect(url_for('login'))
 
-# #page decorators and functions
+# #home rounte
 @app.route('/index',methods=['GET','POST'])
 @login_required
 def index():
-    my_user = User.query.all()
-    return render_template('index.html', my_user=my_user)
+    data_rec = records.query.all()
+    return render_template('index.html', data_rec=data_rec)
 
 
-#addin entry/post user
-@app.route('/add_user', methods=['POST'])
+#add record/post user
+@app.route('/add_rec', methods=['POST', 'GET'])
 @login_required
-def add_user():
-    user = User(request.form['username'], request.form['email'])
-    db.session.add(user)
-    db.session.commit()
-    return redirect(url_for('index'))
+def add_rec():
+    if request.method == 'POST':
+        account = request.form['account']
+        paid_by = request.form['paid_by']
+        paid_by_tele = request.form['paid_by_tele']
+        GCR_No = request.form['GCR_No']
+        amount = request.form['amount']
+        last_edited_user = request.form['last_edited_user']
+        entry = records(account, paid_by, paid_by_tele, GCR_No, amount, last_edited_user)
+        for item in entry:
+            print item
+            flash(item)
+
+        print entry
+        flash(entry)
+        #db.session.add(entry)
+        #db.session.commit()
+        flash('Record entered succesfully')
+        return redirect(url_for('index'))
+    return render_template('add_new.html')
 
 #search function
 @app.route('/search', methods=['POST'])
