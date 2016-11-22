@@ -14,11 +14,11 @@ db = SQLAlchemy(app)
 #my model
 class records(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    account =db.Column(db.String)
-    paid_by = db.Column(db.String(120))
+    account =db.Column(db.String(60))
+    GCR_No = db.Column(db.String(60))
+    paid_by = db.Column(db.String(60))
     paid_by_tele = db.Column(db.Integer)
     amount = db.Column(db.Integer)
-    GCR_No = db.Column(db.String(20))
     last_edited_user = db.Column(db.String(25))
     confirmed_at = db.Column(db.DateTime())
     created = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
@@ -27,12 +27,12 @@ class records(db.Model):
     #db.INT, primary_key=True, autoincrement=False, nullable=False
 
 
-    def __init__(self, account, paid_by, paid_by_tele, amount, GCR_No, last_edited_user):
+    def __init__(self, account, GCR_No, paid_by, paid_by_tele, amount, last_edited_user):
         self.account = account
+        self.GCR_No = GCR_No
         self.paid_by = paid_by
         self.paid_by_tele = paid_by_tele
         self.amount = amount
-        self.GCR_No = GCR_No
         self.last_edited_user = last_edited_user
 
 
@@ -86,21 +86,17 @@ def index():
 @login_required
 def add_rec():
     if request.method == 'POST':
+        #collect form data
         account = request.form['account']
+        GCR_No = request.form['GCR_No']
         paid_by = request.form['paid_by']
         paid_by_tele = request.form['paid_by_tele']
-        GCR_No = request.form['GCR_No']
         amount = request.form['amount']
         last_edited_user = request.form['last_edited_user']
-        entry = records(account, paid_by, paid_by_tele, GCR_No, amount, last_edited_user)
-        for item in entry:
-            print item
-            flash(item)
-
-        print entry
-        flash(entry)
-        #db.session.add(entry)
-        #db.session.commit()
+        #add records
+        entry = records(account, paid_by, paid_by_tele, amount, last_edited_user)
+        db.session.add(entry)
+        db.session.commit()
         flash('Record entered succesfully')
         return redirect(url_for('index'))
     return render_template('add_new.html')
@@ -109,7 +105,7 @@ def add_rec():
 @app.route('/search', methods=['POST'])
 def search():
     query_tag = request.form['search']
-    search_tag = User.query.filter_by(username=query_tag).all()
+    search_tag = records.query.filter_by(account=query_tag).all()
     return render_template('search.html', search_tag=search_tag)
 
 
