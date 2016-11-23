@@ -102,22 +102,15 @@ def add_rec():
         return render_template('print_page.html', result=result)
     return render_template('add_new.html')
 
-# @app.route("/print", methods=['POST','GET'])
-# @login_required
-# def print_page():
-#     return render_template('print_page.html', PostData=PostData)
-
-
 
 #search function
 @login_required
 @app.route('/search', methods=['POST'])
 def search():
+    error = None
     query_tag = request.form['search']
-    # fieldAccount == 'account=query_tag'
-    # fieldCashier == 'Cashier=query_tag'
-    # fieldPaidBy == 'PaidBy=query_tag'
-    search_tag = PAYMENTS.query.filter_by(account=query_tag).all()
+    search_tag = PAYMENTS.query.filter_by(Account=query_tag).all()
+    return render_template('search.html', search_tag=search_tag)
 
 
 if __name__ == '__main__':

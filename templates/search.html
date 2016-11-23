@@ -1,7 +1,19 @@
 {% extends "index.html" %}
-{% block title %}Search{% endblock %}
+{% block title %}Add Entry{% endblock %}
 {% block content %}
-    <div>
-            {{ search_tag.account }}
-   </div>
+
+{% block header %}
+
+<h3>Add Payment Record</h3>
+
+
+{% endblock %}
+
+<div class="container">
+
+   		{% for i in search_tag %}
+            <h4>{{ i.id }} - {{ i.Account }} - {{ i.Payments }}</h4>
+         {% endfor %}
+</div>
+<!-- simple form ends -->
 {% endblock %}
