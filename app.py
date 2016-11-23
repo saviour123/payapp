@@ -12,32 +12,32 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@192.168.
 db = SQLAlchemy(app)
 
 #my model
-class records(db.Model):
+class PAYMENTS(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    account =db.Column(db.String(60))
+    OBJECTID = db.Column(db.Integer)
+    Account =db.Column(db.String(60))
     GCR_No = db.Column(db.String(60))
-    paid_by = db.Column(db.String(60))
-    paid_by_tele = db.Column(db.Integer)
-    amount = db.Column(db.Integer)
-    last_edited_user = db.Column(db.String(25))
-    confirmed_at = db.Column(db.DateTime())
-    created = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
-    Date_request = db.Column(db.DateTime())
+    Payments = db.Column(db.Integer)
+    PaymentType = db.Column(db.String(20))
+    DatePaid = db.Column(db.DateTime(), default=datetime.datetime.utcnow())
+    PaidBy = db.Column(db.String(60))
+    PaidByTele = db.Column(db.String(10))
+    Cashier = db.Column(db.String(25))
+    Date = db.Column(db.DateTime(), default=datetime.date.today())
 
 
-
-
-    def __init__(self, account, GCR_No, paid_by, paid_by_tele, amount, last_edited_user):
-        self.account = account
+    def __init__(self, OBJECTID, Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier):
+        self.OBJECTID = OBJECTID
+        self.Account = Account
         self.GCR_No = GCR_No
-        self.paid_by = paid_by
-        self.paid_by_tele = paid_by_tele
-        self.amount = amount
-        self.last_edited_user = last_edited_user
-
+        self.Payments = Payments
+        self.PaymentType = PaymentType
+        self.PaidBy = PaidBy
+        self.PaidByTele = PaidByTele
+        self.Cashier = Cashier
 
     def __repr__(self):
-        return '<records %r>' % self.account
+        return '<records %r>' % self.Account
 
 
 #login Decorators
@@ -86,12 +86,15 @@ def index():
 def add_rec():
     if request.method == 'POST':
         #collect form data
-        account = request.form['account']
+        OBJECTID = request.form['OBJECTID']
+        Account = request.form['Account']
         GCR_No = request.form['GCR_No']
-        paid_by = request.form['paid_by']
-        paid_by_tele = request.form['paid_by_tele']
-        amount = request.form['amount']
-        last_edited_user = request.form['last_edited_user']
+        Payments = request.form['Payments']
+        PaymentType = request.form['PaymentType']
+        PaidBy = request.form['PaidBy']
+        PaidByTele = request.form['PaidByTele']
+        Cashier = request.form['Cashier']
+
         #add records
         entry = records(account, GCR_No, paid_by, paid_by_tele, amount, last_edited_user)
         db.session.add(entry)
