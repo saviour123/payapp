@@ -31,6 +31,7 @@
 </head>
 
 <body id="page-top" class="index">
+{% block body %}
 
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
@@ -99,7 +100,7 @@
         <div>
           <!-- loop for multiple items -->
           {% for i in data_rec %}
-            <li>{{ i.id }} - {{ i.account }} - {{ i.amount }}</li>
+            <h4>{{ i.id }} - {{ i.Account }} - {{ i.Payments }}</h4>
           {% endfor %}
 
         </div>
@@ -384,7 +385,7 @@
             </div>
         </div>
     </div>
-
+{% endblock %}
     <!-- jQuery -->
     <script src={{ url_for('static', filename="vendor/jquery/jquery.min.js") }}></script>
 

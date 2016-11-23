@@ -29,7 +29,6 @@ class PAYMENTS(db.Model):
 
     def __init__(self, Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier):
         self.Account = Account
-        self.Amount_Due = Amount_Due
         self.GCR_No = GCR_No
         self.Payments = Payments
         self.PaymentType = PaymentType
@@ -94,12 +93,21 @@ def add_rec():
         PaidBy = request.form['PaidBy']
         PaidByTele = request.form['PaidByTele']
         Cashier = request.form['Cashier']
+        result = request.form
+        global PostData
+        PostData = [Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier]
         entry = PAYMENTS(Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier)
         db.session.add(entry)
         db.session.commit()
-        flash("Thank You")
-        return redirect(url_for('index'))
+        return render_template('print_page.html', result=result)
     return render_template('add_new.html')
+
+# @app.route("/print", methods=['POST','GET'])
+# @login_required
+# def print_page():
+#     return render_template('print_page.html', PostData=PostData)
+
+
 
 #search function
 @login_required

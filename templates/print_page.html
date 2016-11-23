@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Print - GSMA</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+
+<div id="printableArea">
+	<h3>RECEIPT- GSMA</h3>
+      <table border = 1>
+         {% for key, value in result.iteritems() %}
+         
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+            
+         {% endfor %}
+      </table>
+      <p>Disclaimer: Contact Us for Any issue</p>
+</div>
+
+<input type="button" onclick="printDiv('printableArea')" value="Print Token"/>
+
+<script>
+function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+</script>
+
+</body>
+</html>
