@@ -4,15 +4,14 @@ from functools import wraps
 import datetime
 
 
-
 #creating the application object
 app = Flask(__name__)
-app.secret_key =  'saviourgidi'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@192.168.1.6/stms'
+app.config.from_object('config.BaseConfig')
 db = SQLAlchemy(app)
 
 #my model
 class PAYMENTS(db.Model):
+    __tablename__ = 'PAYMENTS'
     id = db.Column(db.Integer, primary_key=True)
     OBJECTID = db.Column(db.Integer)
     Account =db.Column(db.String(60))
