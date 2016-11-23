@@ -13,45 +13,52 @@
 	<!-- simple form, to add entry-->
 	<form method="post" action="/add_rec" role="form">
 		<div class="row">
-			<div class="form-group col-xs-5 col-lg-1 ">
+			<div class="form-group col-xs-4 col-lg-3 ">
 				<label>Account: </label>
-				<input type="text" id="account" name="account" class="form-control" required>
+				<input type="text" id="Account" name="Account" class="form-control" required>
 			</div>
 		</div>
 		<div class="row">
-			<div class="form-group col-xs-5 col-lg-1 ">
+			<div class="form-group col-xs-4 col-lg-3 ">
 				<label>GCR-No: </label>
 				<input type="text" id="GCR_No" name="GCR_No" class="form-control" required>
 			</div>
 		</div>
-
-
 		<div class="row">
-			<div class="form-group col-xs-5 col-lg-1 ">
-				<label>Paid By: </label>
-				<input type="text" id="paid_by" name="paid_by" class="form-control" required>
+			<div class="form-group col-xs-4 col-lg-3 ">
+				<label>Payments: </label>
+				<input type="text" id="Payments" name="Payments" class="form-control" required>
 			</div>
 		</div>
 		<div class="row">
-			<div class="form-group col-xs-5 col-lg-1 ">
-				<label>Phone Contact: </label>
-				<input type="text" id="paid_by_tele" name="paid_by_tele" class="form-control" required>
+			<div class="form-group col-xs-4 col-lg-3 ">
+				<label>PaymentType: </label>
+					<select name="PaymentType" id="PaymentType" name="PaymentType" class="form-control" required>
+					    <option value="Cash`">Cash</option>
+					    <option value="Cheque">Cheque </option>
+  					</select>
 			</div>
 		</div>
 		<div class="row">
-			<div class="form-group col-xs-5 col-lg-1 ">
-				<label>Amount: </label>
-				<input type="text" id="amount" name="amount" class="form-control" required>
+			<div class="form-group col-xs-4 col-lg-3 ">
+				<label>PaidBy: </label>
+				<input type="text" id="PaidBy" name="PaidBy" class="form-control" required>
 			</div>
 		</div>
 		<div class="row">
-			<div class="form-group col-xs-5 col-lg-1 ">
+			<div class="form-group col-xs-4 col-lg-3 ">
+				<label>Phone Contact of Person Paying: </label>
+				<input type="text" id="PaidByTele" name="PaidByTele" class="form-control" required>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-xs-4 col-lg-3">
 				<label>Cashier: </label>
-				<input type="text" id="last_edited_user" name="last_edited_user" class="form-control" required>
+				<input type="text" id="Cashier" name="Cashier" class="form-control" required>
 			</div>
 		</div>
 
-	    <div class="row">
+<!-- 	    <div class="row">
 	        <div class='col-sm-6'>
 	            <input type='text' class="form-control" id='datetimepicker4' />
 	        </div>
@@ -60,7 +67,7 @@
 	                $('#datetimepicker4').datetimepicker();
 	            });
 	        </script>
-	    </div>
+	    </div> -->
 
 		<div class="row">
 			<div class="form-group col-xs-5 col-lg-1 ">

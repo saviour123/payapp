@@ -16,6 +16,7 @@ class PAYMENTS(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     OBJECTID = db.Column(db.Integer)
     Account =db.Column(db.String(60))
+    Amount_Due = db.Column(db.Integer)
     GCR_No = db.Column(db.String(60))
     Payments = db.Column(db.Integer)
     PaymentType = db.Column(db.String(20))
@@ -26,15 +27,16 @@ class PAYMENTS(db.Model):
     Date = db.Column(db.DateTime(), default=datetime.date.today())
 
 
-    def __init__(self, OBJECTID, Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier):
-        self.OBJECTID = OBJECTID
+    def __init__(self, Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier):
         self.Account = Account
+        self.Amount_Due = Amount_Due
         self.GCR_No = GCR_No
         self.Payments = Payments
         self.PaymentType = PaymentType
         self.PaidBy = PaidBy
         self.PaidByTele = PaidByTele
         self.Cashier = Cashier
+
 
     def __repr__(self):
         return '<records %r>' % self.Account
@@ -76,7 +78,7 @@ def logout():
 @app.route('/index',methods=['GET','POST'])
 @login_required
 def index():
-    data_rec = records.query.all()
+    data_rec = PAYMENTS.query.all()
     return render_template('index.html', data_rec=data_rec)
 
 
@@ -85,8 +87,6 @@ def index():
 @login_required
 def add_rec():
     if request.method == 'POST':
-        #collect form data
-        OBJECTID = request.form['OBJECTID']
         Account = request.form['Account']
         GCR_No = request.form['GCR_No']
         Payments = request.form['Payments']
@@ -94,12 +94,10 @@ def add_rec():
         PaidBy = request.form['PaidBy']
         PaidByTele = request.form['PaidByTele']
         Cashier = request.form['Cashier']
-
-        #add records
-        entry = records(account, GCR_No, paid_by, paid_by_tele, amount, last_edited_user)
+        entry = PAYMENTS(Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier)
         db.session.add(entry)
         db.session.commit()
-        flash('Record entered succesfully')
+        flash("Thank You")
         return redirect(url_for('index'))
     return render_template('add_new.html')
 
@@ -108,8 +106,10 @@ def add_rec():
 @app.route('/search', methods=['POST'])
 def search():
     query_tag = request.form['search']
-    search_tag = records.query.filter_by(account=query_tag).all()
-    return render_template('search.html', search_tag=search_tag)
+    # fieldAccount == 'account=query_tag'
+    # fieldCashier == 'Cashier=query_tag'
+    # fieldPaidBy == 'PaidBy=query_tag'
+    search_tag = PAYMENTS.query.filter_by(account=query_tag).all()
 
 
 if __name__ == '__main__':
