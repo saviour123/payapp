@@ -13,24 +13,20 @@ db = SQLAlchemy(app)
 
 
 #payments db 
-class User(db.Model):
+class PAYMENTS(db.Model):
     __tablename__ = 'PAYMENTS'
     id = db.Column(db.Integer, primary_key=True)
-    OBJECTID = db.Column(db.Integer)
-    Account = db.Column(db.String(60))
-    Amount_Due = db.Column(db.Integer)
+    Account = db.Column(db.Integer)
     GCR_No = db.Column(db.String(60))
     Payments = db.Column(db.Integer)
     PaymentType = db.Column(db.String(20))
-    DatePaid = db.Column(db.DateTime(), default=datetime.datetime.utcnow())
     PaidBy = db.Column(db.String(60))
     PaidByTele = db.Column(db.String(10))
     Cashier = db.Column(db.String(25))
-    Date = db.Column(db.DateTime(), default=datetime.date.today())
-    __tablename__ = 'User'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(10), unique=True)
-    password = db.Column(db.String(10), unique=True)
+    DatePaid = db.Column(db.DateTime(), default=datetime.datetime.utcnow())
+    DatePaid = db.Column(db.DateTime(), default=datetime.datetime.today())
+
+
 
     def __init__(self, Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier):
         self.Account = Account
@@ -47,22 +43,20 @@ class User(db.Model):
 #users db
 class User(db.Model):
     __tablename__ = 'User'
+    #__table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(10), unique=True)
     password = db.Column(db.String(10), unique=True)
 
 
-    def __init__(self, username, email):
+    def __init__(self, username, password):
         self.username = username
-        self.email = email
+        self.password = password
 
     def __repr__(self):
         return '<User %r>' % self.username
 
 
-
-
-#login_credentials = User.query.filter_by(username=request.form[username])
 
 
 #login check point decorator
@@ -81,12 +75,23 @@ def login_required(f):
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
+        username = request.form['username'].strip()
+        password = request.form['password'].strip()
+        u_login = User.query.filter_by(username=username)
+        print u_login
+        u_pass = User.query.filter_by(password=password)
+        print u_pass
+        if username in u_login and password in u_pass:
             session['logged_in'] = True
-            flash('You are Logged In')
             return redirect(url_for('index'))
+        else:
+            error = 'Invalid Credentials'
+        # if username != u_login or password != u_pass:
+        #     error = 'Invalid Credentials. Please try again.'
+        # else:
+        #     session['logged_in'] = True
+        #     flash('You are Logged In')
+        #     return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
 
@@ -117,9 +122,8 @@ def add_rec():
         PaidBy = request.form['PaidBy']
         PaidByTele = request.form['PaidByTele']
         Cashier = request.form['Cashier']
-        result = request.form
-        global PostData
         PostData = [Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier]
+        result = request.form
         entry = PAYMENTS(Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier)
         db.session.add(entry)
         db.session.commit()
@@ -138,15 +142,16 @@ def search():
 
 
 @login_required
-@app.route('/add_login', methods=['POST'])
+@app.route('/add_login', methods=['POST', 'GET'])
 def add_login():
-    if request.methods == 'POST':
+    if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         login_details = User(username, password)
         db.session.add(login_details)
         db.session.commit()
-        return redirect(url_for(index))
+        flash('User added succesfully')
+        return redirect(url_for('index'))
     return render_template('add_login.html')
 
 
