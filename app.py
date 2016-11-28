@@ -78,20 +78,16 @@ def login():
         username = request.form['username'].strip()
         password = request.form['password'].strip()
         u_login = User.query.filter_by(username=username)
-        print u_login
+        print u_login.first()
         u_pass = User.query.filter_by(password=password)
         print u_pass
-        if username in u_login and password in u_pass:
-            session['logged_in'] = True
-            return redirect(url_for('index'))
+
+        if username != u_login and password != u_pass:
+            error = 'Invalid Credentials, Please try again'
         else:
-            error = 'Invalid Credentials'
-        # if username != u_login or password != u_pass:
-        #     error = 'Invalid Credentials. Please try again.'
-        # else:
-        #     session['logged_in'] = True
-        #     flash('You are Logged In')
-        #     return redirect(url_for('index'))
+            session['logged_in'] = True
+            flash('you are logged In')
+            return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
 

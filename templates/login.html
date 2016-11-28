@@ -20,13 +20,15 @@
             <input type="password" placeholder="password" name="password" value="{{ request.form.password }}"/>
             <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
           </form>
+          <div>
+          <!-- for rendering errors -->
+            {% if error %}
+                <p class="error" style="color: white" align="center"><strong>Error:</strong> {{ error }}</p>
+            {% endif %}
+          </div>
+        
           <hr>
         </div>
-
-        <!-- for rendering errors -->
-        {% if error %}
-          <p class="error"><strong>Error:</strong> {{ error }}</p>
-        {% endif %}
       </div>
   </div>
 </div>
