@@ -1,0 +1,16 @@
+Field to return in a search in combination with payment information       
+
+       [Account]
+      ,[Address]
+      ,[OwnerName]
+      ,[Suburb]
+      ,[RateableV]
+      ,[Zone]
+      ,[Use_]
+      ,[Rate]
+      ,[CurrentTax]
+      ,[Arrears]
+      ,[Telephone]
+      ,[Email]
+      ,[Discount]
+      ,[PictureURL]

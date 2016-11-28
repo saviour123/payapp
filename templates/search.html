@@ -14,6 +14,10 @@
    		{% for i in search_tag %}
             <h4>{{ i.id }} - {{ i.Account }} - {{ i.Payments }}</h4>
         {% endfor %}
+
+        {% if error %}
+         	<p class="error" style="color: teal" align="center"><strong>Error:</strong> {{ error }}</p>
+        {% endif %}
 </div>
 <!-- simple form ends -->
 {% endblock %}
