@@ -2,7 +2,7 @@ from flask	import Flask, render_template, request, url_for, redirect, session, f
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin, login_required 
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
-import datetime
+import datetime, re
 
 
 
@@ -77,17 +77,15 @@ def login():
     if request.method == 'POST':
         username = request.form['username'].strip()
         password = request.form['password'].strip()
-        u_login = User.query.filter_by(username=username)
-        print u_login.first()
-        u_pass = User.query.filter_by(password=password)
-        print u_pass
-
-        if username != u_login and password != u_pass:
-            error = 'Invalid Credentials, Please try again'
-        else:
-            session['logged_in'] = True
-            flash('you are logged In')
-            return redirect(url_for('index'))
+        #search database for the record
+        u_login = User.query.filter_by(username=username)        
+        for i in u_login:
+            if username != i.username and password != i.password:
+                error = 'Invalid Credentials, Please try again'
+            else:
+                session['logged_in'] = True
+                flash('you are logged In')
+                return redirect(url_for('index'))
     return render_template('login.html', error=error)
 
 
