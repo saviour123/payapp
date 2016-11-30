@@ -1,0 +1,80 @@
+#payments db 
+
+import app
+
+class PAYMENTS(db.Model):
+    __tablename__ = 'PAYMENTS'
+    id = db.Column(db.Integer, primary_key=True)
+    Account = db.Column(db.Integer)
+    GCR_No = db.Column(db.String(60))
+    Payments = db.Column(db.Integer)
+    PaymentType = db.Column(db.String(20))
+    PaidBy = db.Column(db.String(60))
+    PaidByTele = db.Column(db.String(10))
+    Cashier = db.Column(db.String(25))
+    Pc_name = db.Column(db.String(25))
+    DatePaid = db.Column(db.DateTime(), default=datetime.datetime.utcnow())
+    DatePaid = db.Column(db.DateTime(), default=datetime.datetime.today())
+
+
+
+    def __init__(self, Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier):
+        self.Account = Account
+        self.GCR_No = GCR_No
+        self.Payments = Payments
+        self.PaymentType = PaymentType
+        self.PaidBy = PaidBy
+        self.PaidByTele = PaidByTele
+        self.Pc_name = Pc_name
+        self.Cashier = Cashier
+
+    def __repr__(self):
+        return '<records %r>' % self.Account
+
+#users db
+class User(db.Model):
+    __tablename__ = 'User'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(10), unique=True)
+    password = db.Column(db.String(10), unique=True)
+
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+
+class DB_RECORDS(db.Model):
+    __tablename__ = 'DB_RECORDS'
+    id = db.Column(db.Integer, primary_key=True)
+    Account = db.Column(db.String(60))
+    Address = db.Column(db.String(60))
+    OwnerName = db.Column(db.String(60))
+    Suburb = db.Column(db.String(60))
+    RateableV = db.Column(db.Integer)
+    Zone = db.Column(db.String(60))
+    Use_ = db.Column(db.String(60))
+    Rate = db.Column(db.Integer)
+    CurrentTax = db.Column(db.Integer)
+    Arrears = db.Column(db.Integer)
+    Payment = db.Column(db.Integer)
+    Balance = db.Column(db.Integer)
+    Telephone = db.Column(db.String(60))
+    Email = db.Column(db.String(60))
+    BillingDate = db.Column(db.Integer)
+    BLOCKIMAGES = db.Column(db.String(10))
+    COMM = db.Column(db.String(60))
+    DIV = db.Column(db.Integer)
+    BLOCK = db.Column(db.Integer)
+    PARCEL = db.Column(db.Integer)
+    Discount = db.Column(db.String(60))
+    Served = db.Column(db.String(60))
+    Warning_Notice = db.Column(db.String(60))
+    Final_Warning_Notice = db.Column(db.String(60))
+    Court_Summon = db.Column(db.String(60))
+    PictureURL = db.Column(db.String(60))
+    SumBuiding = db.Column(db.String(60))
+    SHAPE = db.Column(db.String(60))

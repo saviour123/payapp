@@ -2,14 +2,23 @@ from flask import Flask, render_template, request, url_for, redirect, session, f
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin, login_required 
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
-from models import *
-import datetime
+import datetime, models
 
 
 #creating the application object
 app = Flask(__name__)
 app.config.from_object('config.BaseConfig')
 db = SQLAlchemy(app)
+
+# Create a user to test with
+@app.before_first_request
+def create_user():
+    db.create_all()
+    admin_user = User(username='saviour', password='saviour')
+    db.session.add(admin_user)
+    db.session.commit()
+
+
 
 
 #login check point decorator
@@ -24,14 +33,6 @@ def login_required(f):
     return wrap
 
 
-# # Create a user to test with
-# @app.before_first_request
-# def create_user():
-#     db.create_all()
-#     db.session.add(username='saviour', password='saviour')
-#     db.session.commit()
-
-
 # Loggin route
 @app.route('/', methods=['GET', 'POST'])
 def login():
@@ -41,7 +42,7 @@ def login():
         username = request.form['username'].strip()
         password = request.form['password'].strip()
         #search database for the record
-        session['username'] = username
+        session['username'] = username #store username, submitted with form on line 84
         u_login = User.query.filter_by(username=username)       
         for i in u_login:
             if username != i.username or password != i.password:

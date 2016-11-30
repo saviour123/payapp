@@ -10,10 +10,35 @@
 {% endblock %}
 
 <div class="container">
-
+<div>
    		{% for i in search_tag %}
             <h4>{{ i.id }} - {{ i.Account }} - {{ i.Payments }}</h4>
-        {% endfor %}
+        {{ i.Account }}
+        {{ i.Address }}
+        {{ i.OwnerName }}
+        {{ i.Suburb }}
+        {{ i.RateableV }}
+        {{ i.Zone }}
+        {{ i.Use_ }}
+        {{ i.Rate }}
+        {{ i.CurrentTax }}
+        {{ i.Arrears }}
+        {{ i.Telephone }}
+        {{ i.Email }}
+        {{ i.Discount }}
+
+      </div>
+      <!-- picture of property -->
+      <div>
+      	<img src="{{ i.PictureURL }}" alt="">
+      </div>
+
+
+      {% endfor %}
+
+
+
+
 
         {% if error %}
          	<p class="error" style="color: teal" align="center"><strong>Error:</strong> {{ error }}</p>
