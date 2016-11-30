@@ -14,8 +14,8 @@ db = SQLAlchemy(app)
 # Create a user to test with
 @app.before_first_request
 def create_user():
-    db.create_all()
-    admin_user = User(username='saviour', password='saviour')
+    #db.create_all()
+    admin_user = db_user(username='saviour', password='saviour')
     db.session.add(admin_user)
     db.session.commit()
 
@@ -44,7 +44,7 @@ def login():
         password = request.form['password'].strip()
         #search database for the record
         session['username'] = username #store username, submitted with form on line 84
-        u_login = User.query.filter_by(username=username)       
+        u_login = db_user.query.filter_by(username=username)       
         for i in u_login:
             if username != i.username or password != i.password:
                 error = 'Invalid Credentials, Please try again'
@@ -68,8 +68,8 @@ def logout():
 @app.route('/index',methods=['GET','POST'])
 @login_required
 def index():
-    data_rec = PAYMENTS.query.all()
-    return render_template('index.html', data_rec=data_rec)
+    #data_rec = db_payments.query.all()
+    return render_template('index.html')
 
 
 #add record/post user
@@ -86,8 +86,8 @@ def add_rec():
         Cashier = session['username']
         pc_name = os.environ.get('USERNAME')
         PostData = [Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier]
-        result = request.form
-        entry = PAYMENTS(Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier, pc_name)  
+        result = request.form #this line was served to print page, make sure you learn jinja before fooling
+        entry = db_payments(Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier, pc_name)  
         db.session.add(entry)
         db.session.commit()
         return render_template('print_page.html', result=result, Cashier=Cashier)
@@ -101,7 +101,7 @@ def search():
     error = None
     query_tag = request.form['search']
     try:
-        search_tag = PAYMENTS.query.filter_by(Account=query_tag).all()
+        search_tag = db_records.query.filter_by(Account=query_tag).all()
     except:
         error = 'Record does not exist, Contact administrator'
     return render_template('search.html', search_tag=search_tag, error=error)
@@ -114,7 +114,7 @@ def add_login():
         try:
             username = request.form['username']
             password = request.form['password']
-            login_details = User(username, password)
+            login_details = db_user(username, password)
             db.session.add(login_details)
             db.session.commit()
             flash('User added succesfully')

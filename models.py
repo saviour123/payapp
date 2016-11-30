@@ -3,11 +3,13 @@
 # three tables here, read the line carefully and always get a backup
 
 from app import *
+from app import db
+db = SQLAlchemy(app)
 
-# table 1(DB_RECORDS) this is the table for records, 
+# table 1(db_records) this is the table for records, 
 # records can then be imported as csv file.
-class DB_RECORDS(db.Model):
-    __tablename__ = 'DB_RECORDS'
+class db_records(db.Model):
+    __tablename__ = 'db_records'
     id = db.Column(db.Integer, primary_key=True)
     Account = db.Column(db.String(60))
     Address = db.Column(db.String(60))
@@ -34,9 +36,12 @@ class DB_RECORDS(db.Model):
     Warning_Notice = db.Column(db.String(60))
     Final_Warning_Notice = db.Column(db.String(60))
     Court_Summon = db.Column(db.String(60))
+    PictureID = db.Column(db.String(60))
     PictureURL = db.Column(db.String(60))
     SumBuiding = db.Column(db.String(60))
-    SHAPE = db.Column(db.String(60))
+    SHAPE = db.Column(db.String(500))
+    
+
 
     #initialize the db elements
     def __init__(self, Account,Address,OwnerName,Suburb,RateableV,Zone,Use_,Rate,CurrentTax,Arrears,Payment,Balance,Telephone,Email,BillingDate,BLOCKIMAGES,COMM,DIV,BLOCK,PARCEL,Discount,Served,Date_Served,Warning_Notice,Final_Warning_Notice,Court_Summon,PictureID,PictureURL,SumBuiding,SHAPE):
@@ -72,13 +77,13 @@ class DB_RECORDS(db.Model):
         self.SHAPE = SHAPE
 
 def __repr__(self):
-        return '<DB_RECORDS %r>' % self.Account
+        return '<db_records %r>' % self.Account
 
 
 # table 2
 # this table holds the transaction, and payments
-class PAYMENTS(db.Model):
-    __tablename__ = 'PAYMENTS'
+class db_payments(db.Model):
+    __tablename__ = 'db_payments'
     id = db.Column(db.Integer, primary_key=True)
     Account = db.Column(db.Integer)
     GCR_No = db.Column(db.String(60))
@@ -104,12 +109,12 @@ class PAYMENTS(db.Model):
         self.Cashier = Cashier
 
     def __repr__(self):
-        return '<PAYMENTS %r>' % self.Account
+        return '<db_payments %r>' % self.Account
 
 # table 3
 #users db
-class User(db.Model):
-    __tablename__ = 'User'
+class db_user(db.Model):
+    __tablename__ = 'db_user'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(10), unique=True)
     password = db.Column(db.String(10), unique=True)
@@ -120,6 +125,6 @@ class User(db.Model):
         self.password = password
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<db_user %r>' % self.username
 
 
