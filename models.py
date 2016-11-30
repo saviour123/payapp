@@ -2,7 +2,7 @@
 # this is the schema for creating the tables, ther are 
 # three tables here, read the line carefully and always get a backup
 
-import app
+from app import *
 
 # table 1(DB_RECORDS) this is the table for records, 
 # records can then be imported as csv file.
@@ -89,11 +89,11 @@ class PAYMENTS(db.Model):
     Cashier = db.Column(db.String(25))
     Pc_name = db.Column(db.String(25))
     DatePaid = db.Column(db.DateTime(), default=datetime.datetime.utcnow())
-    DatePaid = db.Column(db.DateTime(), default=datetime.datetime.today())
+    Date = db.Column(db.DateTime(), default=datetime.datetime.today())
 
 
 
-    def __init__(self, Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Cashier):
+    def __init__(self, Account, GCR_No, Payments, PaymentType, PaidBy, PaidByTele, Pc_name, Cashier):
         self.Account = Account
         self.GCR_No = GCR_No
         self.Payments = Payments

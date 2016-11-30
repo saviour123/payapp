@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, url_for, redirect, session, f
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin, login_required 
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
-import datetime, models
+import datetime
+from models import *
 
 
 #creating the application object

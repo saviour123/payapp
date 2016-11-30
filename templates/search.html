@@ -10,39 +10,42 @@
 {% endblock %}
 
 <div class="container">
-<div>
-   		{% for i in search_tag %}
-            <h4>{{ i.id }} - {{ i.Account }} - {{ i.Payments }}</h4>
-        {{ i.Account }}
-        {{ i.Address }}
-        {{ i.OwnerName }}
-        {{ i.Suburb }}
-        {{ i.RateableV }}
-        {{ i.Zone }}
-        {{ i.Use_ }}
-        {{ i.Rate }}
-        {{ i.CurrentTax }}
-        {{ i.Arrears }}
-        {{ i.Telephone }}
-        {{ i.Email }}
-        {{ i.Discount }}
+	<div>
+	{% for i in search_tag %}
+		<h4>{{ i.id }} - {{ i.Account }} - {{ i.Payments }}</h4>
+		<span><h3>Name: {{ i.OwnerName }}</h3></span>
+		<span>Account Number: {{ i.Account }}</span>
+		<div>
+			Address: {{ i.Address }} <span>Suburb: {{ i.Suburb }}</span><br>
 
-      </div>
-      <!-- picture of property -->
-      <div>
-      	<img src="{{ i.PictureURL }}" alt="">
-      </div>
+		</div>
+	
+		{{ i.RateableV }} <br>
+		{{ i.Zone }} <br>
+		{{ i.Use_ }} <br>
+		{{ i.Rate }} <br>
+		{{ i.CurrentTax }} <br>
+		{{ i.Arrears }} <br>
+		{{ i.Telephone }} <br>
+		{{ i.Email }}
+		{{ i.Discount }}
 
-
-      {% endfor %}
-
-
+	</div>
+	<!-- picture of property -->
+	<div>
+		<img src="{{ i.PictureURL }}" alt="">
+	</div>
 
 
+	{% endfor %}
 
-        {% if error %}
-         	<p class="error" style="color: teal" align="center"><strong>Error:</strong> {{ error }}</p>
-        {% endif %}
+
+
+
+
+	{% if error %}
+	<p class="error" style="color: teal" align="center"><strong>Error:</strong> {{ error }}</p>
+	{% endif %}
 </div>
 <!-- simple form ends -->
 {% endblock %}
