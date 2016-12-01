@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 # Create a user to test with
 @app.before_first_request
 def create_user():
-    #db.create_all()
+    db.create_all()
     admin_user = db_user(username='saviour', password='saviour')
     db.session.add(admin_user)
     db.session.commit()
