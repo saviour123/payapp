@@ -10,12 +10,13 @@
 {% endblock %}
 
 <div class="container">
+{% for i in search %}
 	<!-- simple form, to add entry-->
 	<form method="post" action="/add_rec" role="form">
 		<div class="row">
 			<div class="form-group col-xs-4 col-lg-3 ">
 				<label>Account: </label>
-				<input type="text" id="Account" name="Account" class="form-control" required>
+				<input type="text" id="Account" name="Account" class="form-control" required value="{{ i.Account }}">
 			</div>
 		</div>
 		<div class="row">
@@ -60,5 +61,6 @@
 </div>
 
 </div>
+{% endfor %}
 <!-- simple form ends -->
 {% endblock %}

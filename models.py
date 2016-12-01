@@ -87,7 +87,7 @@ def __repr__(self):
 class db_payments(db.Model):
     __tablename__ = 'db_payments'
     id = db.Column(db.Integer, primary_key=True)
-    Account = db.Column(db.Integer)
+    Account = db.Column(db.String(60))
     GCR_No = db.Column(db.String(60))
     Payments = db.Column(db.Float, nullable=False)
     PaymentType = db.Column(db.String(20))

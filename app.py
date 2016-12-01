@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect, session, f
 from flask_security import Security, SQLAlchemyUserDatastore, UserMixin, RoleMixin, login_required 
 from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
-import datetime
+import datetime, os
 from models import *
 
 
@@ -93,7 +93,8 @@ def add_rec():
         db.session.add(entry)
         db.session.commit()
         return render_template('print_page.html', result=result, Cashier=Cashier)
-    return render_template('add_new.html')
+    search = db_records.query.filter_by(Account=query_tag).all()
+    return render_template('add_new.html', search=search)
 
 
 #search function
@@ -101,7 +102,9 @@ def add_rec():
 @app.route('/search', methods=['POST'])
 def search():
     error = None
+    global query_tag
     query_tag = request.form['search']
+    session['query_tag'] = query_tag
     try:
         search_tag = db_records.query.filter_by(Account=query_tag).all()
     except:
