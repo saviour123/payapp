@@ -106,10 +106,10 @@ def search():
     query_tag = request.form['search']
     session['query_tag'] = query_tag
     try:
-        search_tag = db_records.query.filter_by(Account=query_tag).all()
+        search = db_records.query.filter_by(Account=query_tag).all()
     except:
         error = 'Record does not exist, Contact administrator'
-    return render_template('search.html', search_tag=search_tag, error=error)
+    return render_template('search.html', search=search, error=error)
 
 
 #adding login routing
