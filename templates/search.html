@@ -11,33 +11,27 @@
 
 <div class="container">
 	<div>
-	{% for i in search_tag %}
-		<h4>{{ i.id }} - {{ i.Account }} - {{ i.Payments }}</h4>
-		<span><h3>Name: {{ i.OwnerName }}</h3></span>
-		<span>Account Number: {{ i.Account }}</span>
-		<div>
-			Address: {{ i.Address }} <span>Suburb: {{ i.Suburb }}</span><br>
-
-		</div>
-	
-		{{ i.RateableV }} <br>
-		{{ i.Zone }} <br>
-		{{ i.Use_ }} <br>
-		{{ i.Rate }} <br>
-		{{ i.CurrentTax }} <br>
-		{{ i.Arrears }} <br>
-		{{ i.Telephone }} <br>
-		{{ i.Email }}
-		{{ i.Discount }}
-		{{ i.PictureURL }}
+		{% for i in search_tag %}
+		<p>
+			<h3>Name: {{ i.OwnerName }}</h3><br>
+			<h5>Account Number: {{ i.Account }}</h5><br>
+			<h5>Suburb: {{ i.Suburb }}</h5><br>
+			<h5>Ratetable Value: </h5>{{ i.RateableV }}</h5><br>
+			<h5>Zone: {{ i.Zone }}</h5><br>
+			<h5>Use: {{ i.Use_ }}</h5><br>
+			<h5>Rate: {{ i.Rate }} <br>
+			<h5>Current Tax: {{ i.CurrentTax }}</h5><br>
+			<h5>Arrears: {{ i.Arrears }}</h5><br>
+			<h5>Telephone: {{ i.Telephone }}</h5><br>
+			<h5>Email: {{ i.Email }}</h5><br>
+			<h5>Suburb: {{ i.Discount }}</h5><br>
+		</p>
 	</div>
-	<br>
-	http://placehold.it/350x150
-	<!-- picture of property -->
+
+
 	<div style="border: 2px teal">
-		<img src="http://placehold.it/350x150" alt="Image is here">
+		<img src="{{ i.PictureURL }}" alt="Image is here">
 	</div>
-
 
 	{% endfor %}
 
