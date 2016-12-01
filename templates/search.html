@@ -12,36 +12,83 @@
 <div class="container">
 	<div>
 		{% for i in search_tag %}
-		<p>
-			<h3>Name: {{ i.OwnerName }}</h3><br>
-			<h5>Account Number: {{ i.Account }}</h5><br>
-			<h5>Suburb: {{ i.Suburb }}</h5><br>
-			<h5>Ratetable Value: </h5>{{ i.RateableV }}</h5><br>
-			<h5>Zone: {{ i.Zone }}</h5><br>
-			<h5>Use: {{ i.Use_ }}</h5><br>
-			<h5>Rate: {{ i.Rate }} <br>
-			<h5>Current Tax: {{ i.CurrentTax }}</h5><br>
-			<h5>Arrears: {{ i.Arrears }}</h5><br>
-			<h5>Telephone: {{ i.Telephone }}</h5><br>
-			<h5>Email: {{ i.Email }}</h5><br>
-			<h5>Suburb: {{ i.Discount }}</h5><br>
-		</p>
+		<div class="table_div">
+			<!-- search result here, text -->
+			<table class="table table-striped">
+				<!--   <thead>
+				    <tr>
+				      <th>#</th>
+				      <th>First Name</th>
+				      <th>Last Name</th>
+				      <th>Username</th>
+				    </tr>
+				</thead> -->
+				<tbody>
+					<tr>
+						<th scope="row"><b>Name: </b></th>
+						<td>{{ i.OwnerName }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Account Number: </strong></th>
+						<td>{{ i.Account }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Suburb: </strong></th>
+						<td>{{ i.Suburb }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Ratetable Value: </strong></th>
+						<td>{{ i.RateableV }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Zone: </strong></th>
+						<td>{{ i.Zone }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Use: </strong></th>
+						<td>{{ i.Use_ }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Rate: </strong></th>
+						<td>{{ i.Rate }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Current Tax: </strong></th>
+						<td>{{ i.CurrentTax }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Arrears: </strong></th>
+						<td>{{ i.Arrears }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Telephone: </strong></th>
+						<td>{{ i.Telephone }}</td>
+					</tr>
+					<tr>
+						<th scope="row"><strong>Email: </strong></th>
+						<td>{{ i.Email }}</td>
+					</tr>
+					<tr>
+					<th scope="row"><strong>Suburb: <strong></th>
+						<td>{{ i.Discount }}</td>
+					</tr>
+				</tbody>
+			</table>	
+		</div> <!-- table div ends -->
+		<!-- image div begins -->
+		<div style="border: 2px teal">
+			<img src="{{ i.PictureURL }}" alt="Image is here">
+		</div>
+
+		{% endfor %}
+
+
+
+
+
+		{% if error %}
+		<p class="error" style="color: teal" align="center"><strong>Error:</strong> {{ error }}</p>
+		{% endif %}
 	</div>
-
-
-	<div style="border: 2px teal">
-		<img src="{{ i.PictureURL }}" alt="Image is here">
-	</div>
-
-	{% endfor %}
-
-
-
-
-
-	{% if error %}
-	<p class="error" style="color: teal" align="center"><strong>Error:</strong> {{ error }}</p>
-	{% endif %}
-</div>
-<!-- simple form ends -->
-{% endblock %}
+	<!-- simple form ends -->
+	{% endblock %}

@@ -44,11 +44,13 @@ def login():
         password = request.form['password'].strip()
         #search database for the record
         session['username'] = username #store username, submitted with form on line 84
-        u_login = db_user.query.filter_by(username=username)       
+        u_login = db_user.query.filter_by(username=username)
+        data_rec = db_user.query.all()       
         for i in u_login:
             if username != i.username or password != i.password:
                 error = 'Invalid Credentials, Please try again'
-                flash('Invalid Credentials')
+            # elif not db_user.query.all() = None:
+            #     error = "Wrong Username or Password, Contact Your Admin"
             else:
                 session['logged_in'] = True
                 flash('you are logged In')
@@ -107,6 +109,7 @@ def search():
     return render_template('search.html', search_tag=search_tag, error=error)
 
 
+#adding login routing
 @login_required
 @app.route('/add_login', methods=['POST', 'GET'])
 def add_login():

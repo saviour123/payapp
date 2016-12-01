@@ -38,7 +38,7 @@ class db_records(db.Model):
     Final_Warning_Notice = db.Column(db.String(60))
     Court_Summon = db.Column(db.String(60))
     PictureID = db.Column(db.String(60))
-    PictureURL = db.Column(db.String(60))
+    PictureURL = db.Column(db.String(200))
     SumBuiding = db.Column(db.Float)
     SHAPE = db.Column(db.String(1000))
 
