@@ -1,14 +1,11 @@
-A simple Flask app.
-to make payment transactions.
-Built with Flask
-Boostrap kind courtesy Freelancer template.
-And Postgres.
+## Payapp Flask app.
+This is a payment system web app based of Python's Flask. It uses Postgres as the
+database and Boostrap as frontend.
 
-Intructions
-
+## Intructions
 
 1. git clone the repo and cd into repo
-2. create a virtualenv with python virtualenv ..
-3. pip install -r requirements.txt
-4. python app.py
-you can then contribute to my project and any improvements are welcome.
+2. create a virtualenv with `virtualenv env` 
+3. Install requirements: `pip install -r requirements.txt`
+4. Run: `python app.py`
+
