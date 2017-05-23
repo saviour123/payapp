@@ -9,7 +9,7 @@ There is [Flask](http://flask.pocoo.org/) and Bootstrap inside. Thanks to Boostr
 ## How to Use It
 
 
-clone the repo `$ git clone https://github.com/saviour123/payapp.git && cd payapp`
+Clone the repo `$ git clone https://github.com/saviour123/payapp.git && cd payapp`
 
 You need a virtualenv `$ virtualenv env`
 
