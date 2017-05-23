@@ -1,7 +1,7 @@
 ## payapp.
 
-A little Payment System Written In Python and Posgresql.
-There is flask and Boostrap inside. Thanks to Boostrap Freelancer Template.
+A little Payment System Written In Python and [Posgresql](https://www.postgresql.org/).
+There is [Flask](http://flask.pocoo.org/) and Bootstrap inside. Thanks to Boostrap Freelancer Template.
 
 
 
